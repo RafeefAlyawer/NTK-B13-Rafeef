@@ -26,7 +26,7 @@ public class Exercise1 extends Hooks {
 		WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button"));
 		loginButton.click();
 				
-		WebElement header = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[1]/span/h6"));
+		WebElement header = driver.findElement(By.className("oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module"));
 		String headerText = header.getText();
 		System.out.println(headerText);
 		
