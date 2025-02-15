@@ -2,6 +2,9 @@ package com.noorteck.selenium.day1HW;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Hooks;
 
@@ -25,15 +28,17 @@ public class Exercise1 extends Hooks {
 		
 		WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button"));
 		loginButton.click();
-				
-		WebElement header = driver.findElement(By.cssSelector("h6"));
+		
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10);		
+	    WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("-h6")));
 		String headerText = header.getText();
 		System.out.println(headerText);
 		
 		if(headerText.equals("Dashboard")) {
-			System.out.println("Login successful! Header text");
+			System.out.println("Login successful! Header verified :" + header);
 		}else {
-			System.out.println("Login faild or header");
+			System.out.println("Login faild or header not verified:" + header );
 		}
 		
 		
