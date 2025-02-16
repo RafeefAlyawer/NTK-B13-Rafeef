@@ -2,6 +2,8 @@ package com.noorteck.selenium.day1HW;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Hooks;
 
@@ -21,12 +23,14 @@ public class Exercise1 extends Hooks {
 		WebElement password = driver.findElement(By.name("password"));
 		password.sendKeys("admin123");
 		
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		
 		WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button"));
 		loginButton.click();
-				
-		WebElement header = driver.findElement(By.className("oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module"));
+		
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10);		
+		WebElement header =wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("oxd-text--h6")));
 		String headerText = header.getText();
 		System.out.println(headerText);
 		
