@@ -1,7 +1,10 @@
 package com.noorteck.selenium.day1HW;
 
+import org.bouncycastle.jcajce.provider.asymmetric.EC;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 
 import utils.Hooks;
 
@@ -18,15 +21,19 @@ public class Exersice2 extends Hooks {
 		
 		WebElement registerLink = driver.findElement(By.linkText("REGISTER"));
 		registerLink.click();
-   // verify the title is Mercury Tours
+		Thread.sleep(2000);
 		
-		//String title = "Mercury Tours";
-		//WebElement title = driver.findElement(By.xpath(/html/body/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td/table/tbody/tr/td/p[1]/img""));
-		String actaulTitle = driver.getTitle();
-		String expectTitle="Mercury Tours";
-		if(!actaulTitle.equals("expectTitle")) {
-			System.out.println("faild : page title does not match:" + expectTitle);
+   // verfiy the title is Mercury Tours
+		String expectedTitle = "Mercury Tours";
+		String actualTitle = driver.getTitle();
+		
+		if(actualTitle.contains(expectedTitle)) {
+			System.out.println("page title verfied:" +expectedTitle );
+		}else {
+			System.out.println("Title mismatch! Expected: " + expectedTitle + ", but got: " + actualTitle);
 		}
+		
+		
 		
 	//firstName field
 	WebElement firstName = driver.findElement(By.name("firstName"));
@@ -94,7 +101,8 @@ public class Exersice2 extends Hooks {
 	sumbit.click();
 	Thread.sleep(2000);
 	
-	WebElement confirmationMessage = driver.findElement(By.tagName("body"));
+	//Retrieve the cofirmation test message 
+    WebElement confirmationMessage = driver.findElement(By.xpath("//b[contains(text(),'Thank you for registering.')]"));
 	String textMessage = confirmationMessage.getText();
 	if (confirmationMessage.equals("Thank you for registering")) {
 		System.out.println("Test Case passed");
